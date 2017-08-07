@@ -1,11 +1,11 @@
 # 登录
-![登录](./images/login.png)
+![登录](./images/login.jpg)
 # 注册
 ![注册](./images/regist.png)
 # 首页
 ![首页](./images/main.png)
 # 地图
-![地图](./images/location.png)
+![地图](./images/location.jpg)
 # chat1
 ![chat1](./images/chat1.png)
 # chat2
