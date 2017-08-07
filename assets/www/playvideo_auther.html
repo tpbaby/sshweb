@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title></title>
+		
+		<style type="text/css">
+			
+			*{
+				padding: 0px;
+				margin: 0px;
+				font-family: "幼圆";
+				text-align: center;
+				font-size: 16px;
+			}
+			
+			html{
+				height: 100%;/*
+				background-color: #DDDDDD;*/
+			}
+			
+			input{
+				outline: none;
+			}
+			
+			body{
+				/*------------这里不能限制死，否则页面只有实际的屏幕高--------------*/
+				/*height: 100%;*/
+				display: flex;
+				flex-flow: wrap  row;
+				
+				flex-direction: column;
+				
+				justify-content: center;
+				align-items: center;
+				
+			}
+			
+			/*-------头部----------------------*/
+			header, footer{
+				/*opacity: 0.4;*/
+				height: 3em;
+				position: fixed;
+				width: 100%;
+				background-color: darkcyan;
+				z-index: 200;
+			}
+			
+			header img{
+				width: 40px;
+			}
+			header{
+				top: 0px;
+			}
+			
+			.quen{
+				/*border: 1px solid darkblue;*/
+				width: 50px;
+				height: 100%;
+				color: white;
+				line-height: 300%;
+				font-weight: 800;
+				float: left;
+				font-size: 14px;
+				cursor: pointer;
+			}
+			
+		
+			
+			/*----------脚部----------*/
+			footer{
+				color: white;
+				bottom: 0px;
+				background-color: darkcyan;
+			}
+			
+			/*----------身体部分---------*/
+			section{
+				width: 100%;
+				height: auto;
+				background-color: white;
+				
+				display: flex;
+				flex-flow: wrap  row;
+				flex-direction: column;
+				align-items: center;
+			}
+			
+			.video_msg{
+				margin-top: 3.5em;
+				color: darkcyan;
+				font-size: 20px;
+				letter-spacing: 2px;
+				padding: 10px;
+				border: 1px solid #ddd;
+				border-radius: 10px;
+				box-shadow: 2px 2px 2px lightgray;
+			}
+			
+			.video_msg span{
+				font-family: "华文琥珀";
+			}
+			
+			.video_msg span:nth-child(2){
+				margin-left: -8px;
+			}
+			
+			section hr{
+				width: 100%;
+				border: 1px dashed darkcyan;
+				margin-top: 20px;
+			}
+			
+			
+			.musiclist{
+		    	width: 100%;
+		    	height: auto;
+		    	background-color: white;
+		    	/*margin-bottom: 3em;*/
+		    }
+		    
+		    .list{
+		    	width: 100%;
+		    	height: 60px;
+		    	background-color: white;
+		    	border-bottom: 2px solid #ddd;
+		    	position: relative;
+		    }
+		    
+		    .list:hover{
+		    	background-color: #ddd;
+		    	left: 5px;
+		    }
+		    
+		    .music_id{
+		    	width: 50px;
+		    	height: 62px;
+		    	background-color: white;
+		    	text-align: center;
+		    	line-height: 60px;
+		    }
+		    
+		    .music_msg{
+		    	z-index: 200;
+		    	width: auto;
+		    	height: 60px;
+		    	/*background-color: lightblue;*/
+		    	display: inline-block;
+		    	position: absolute;
+		    	top: 0px;
+		    	left: 50px;
+		    }
+		    
+		    .music_msg span{
+		    	/*
+		    	display: block;*/
+		    	height: 100%;
+		    	/*width: 100%;*/
+		    }
+		    
+		    .music_msg span:nth-child(1){
+		    	color: lightseagreen;
+		    	font-size: 18px;
+		    	float: left;
+		    	margin-left: 20px;
+		    	margin-top: 10px;
+		    }
+		    
+		    .music_msg span:nth-child(2){
+		    	position: absolute;;
+		    	color: gray;
+		    	font-size: 12px;
+		    	top: 40px;
+		    	left: 30px;
+		    }
+		    
+		    .music_msg span:nth-child(3){
+		    	display: none;	
+		    }
+		    
+		    .more_play{
+		    	display: inline-block;
+		    	color: black;
+		    	float: right;
+		    	margin-top: -45px;
+		    	margin-right: 10px;
+		    	font-size: 26px;
+		    }
+		    
+		    .botton{
+		    	margin-bottom: 3em;
+		    }
+			
+		</style>
+	</head>
+	<body>
+		<header>
+			
+			<span class="quen">&lt;返回</span>
+		</header>
+		
+		<section>
+			<div class="video_msg">
+				<span class="v_autherspan">China</span>
+				<span>类的视频</span>
+			</div>
+			
+			<hr>
+			
+			<div class="musiclist">
+				<!--存放视频的位置-->
+				
+			</div>
+			
+			
+		</section>
+		
+	<footer>
+		
+	</footer>
+		
+		
+	</body>
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js" ></script>
+	<script src="js/playvideo_auther.js"></script>
+	<script type="text/javascript" src="js/db.js" ></script>
+	<script>
+		
+		window.addEventListener("load",initPage,false);
+		
+		function initPage(){
+			/*-----------获取地址栏信息------------*/
+			var args1 = getQueryStringArgs();
+		
+			var v_auther = args1["vauther"];
+			
+			//alert(v_auther);
+			$(".v_autherspan").html(v_auther);
+			
+			/*------------------获取数据库的信息--------------------*/
+			
+			var db;
+			var htmldb = new Htmldb();
+			htmldb.init();
+			htmldb.selectAutherData(v_auther);
+			//htmldb.deleteData();
+			//htmldb.addVideoData();
+			//htmldb.selectDatas();
+			//htmldb.dropTable();
+		}
+		
+		/*返回上一哥页面*/
+		$(".quen").click(function(){
+			history.back();
+		});
+		
+	  	$(".musiclist").on("click",".list",function(){
+			//alert($(this).children().length)
+			var musicmsg = $(this).find(".music_msg");
+			//alert(musicmsg.children().length);
+			var list = musicmsg.children("span");
+			var msglength = musicmsg.children("span").length;
+			
+			var mname = list.eq(0).text();
+			var mauther = list.eq(1).text();
+			var mpath = "res/video/"+list.eq(2).text();
+			
+			var json2  = {
+				"mname":mname,
+				"mauther":mauther,
+				"mpath":mpath
+			};
+			//alert(json2.mname);
+			
+			window.location.href = "playVideo_more.html?mname="+mname+"&mauther="+mauther+"&mpath="+mpath;
+		});	
+			
+		
+	</script>
+</html>

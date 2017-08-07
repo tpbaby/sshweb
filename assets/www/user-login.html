@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<link rel="stylesheet" href="css/animate-tp.css" />
+		<link rel="stylesheet" href="css/public-log-reg.css" />
+		<link rel="stylesheet" href="css/login.css" />
+		<style type="text/css">
+			
+			.showsy{
+				animation-name: clickstyle;
+				animation-duration: 0.5s;
+				animation-delay: 0s;
+				animation-timing-function: ease;
+				animation-fill-mode:forwards;
+				
+				
+				-webkit-animation-name: clickstyle;
+				-webkit-animation-duration: 1s;
+				-webkit-animation-delay: 0.1s;
+				-webkit-animation-fill-mode:forwards
+				-webkit-animation-timing-function: ease;
+			}
+			
+			.errorlogin{
+				color: red;
+				margin-top: -10px;
+				margin-bottom: 10px;
+				display: none;
+			}
+			
+		</style>
+	</head>
+	<body>
+		
+		<div class="containt">
+			
+			<div class=" login">
+				
+				<img src="img/images/fireworks.jpg" class="changeheadimg"/>
+				<input type="text" placeholder="请输入用户名" id="username" name="username" class="fadeInUp"/>
+				<input type="password" placeholder="请输入密码" id="userpwd" name="userpwd" class="fadeInUp"/>
+				<button type="button" class="fadeInUp" id="loginclick">点击登录</button>
+				<div class="shuiyin"></div>
+				<span class="errorlogin">用户名或密码错误！</span>
+			</div>
+			
+			
+			<div class="accept fadeInUp">
+				
+				<div class="remind">
+					<input type="checkbox" id="checkpwd" checked="checked"/>
+					
+					<label class="rememberlb">记住密码</label>
+				</div>
+				
+				<a href="" class="forget ">|<label>忘记密码</label></a>
+				<a href="" class="forget "><label> 注册账号</label></a>
+				
+			</div>
+		</div>
+		
+		<div class="footer">
+			<span>tp's little program | welcome</span>
+		</div>
+		
+	</body>
+	
+	<script src="js/jquery-3.1.1.min.js"></script>
+	<script>
+		
+		$(function(){
+		
+			/* ---记住密码的按钮操作----- */
+			$(".rememberlb").click(function(){
+				
+				var checkval = $("input[id='checkpwd']:checked").val();
+				
+				if($("#checkpwd").is(":checked")){
+					$("input[id='checkpwd']").removeAttr("checked");
+					$(".rememberlb").css({"background-image":"url(img/login/appbar.checkmark.unchecked.png)"});
+				}else{
+					$("input[id='checkpwd']").attr({"checked":"checked"});
+					$(".rememberlb").css({"background-image":"url(img/login/appbar.checkmark.png)"});
+				}
+				
+			});
+	
+			
+			/* 登录按钮按上去会有一个小气泡 */
+			$("#loginclick").click(function(){
+				
+				//alert(1111);
+				var x,y;
+				x = event.pageX-5;
+				y = event.pageY-5;
+				
+				$(".shuiyin").css({"left":x+"px"});
+				$(".shuiyin").css({"top":y+"px"});
+				$(".shuiyin").addClass("showsy");
+				
+				
+				var name = $("#username").val();
+				var pwd = $("#userpwd").val();
+				var checkval = $("input[id='checkpwd']:checked").val();
+				
+				//var sendUrl = "http://172.16.16.7:8090/sshweb/login_checkLogin.action";
+				var data = "name="+ name +"&pwd="+ pwd +"&checkval="+ checkval;
+				alert(data);
+				//sendworker(sendUrl, data, "text");
+				$.ajax({
+					type:'post',
+					url:'http://192.168.1.103:8090/sshweb/login_checkLogin.action',
+					
+					data:{"name":name,"pwd":pwd,"checkval":checkval},
+					dataType:'text',
+					success:function(data){
+						alert(data);
+						if(data == "y"){
+							window.location.href = "main.html";
+						}else{
+							$(".errorlogin").css({"display":"block"});
+						}
+					},
+					error:function()
+					{
+						alert("请求服务器资源失败!");
+						
+					}
+				});
+				
+			});
+			
+		});
+		
+		
+	</script>
+</html>

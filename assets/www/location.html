@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	<meta charset="UTF-8" />
+	<title>location</title>
+	
+	<link rel="stylesheet" href="css/location.css" />
+	</head>
+	
+	<body>
+		<div class="locmsg">
+			<span class="back">返回</span>
+			
+			<div class="searchloc">
+				<input type="text" id="search" placeholder="请输入城市名" />
+				
+			</div>
+			
+			<svg class="icon searchcolor" id="searchicon" aria-hidden="true">
+				  <use xlink:href="#icon-sousuo"></use>
+			</svg>
+			
+			<div class="curloc">
+				<span >当前位置:</span>	
+				<span id="msgLocation">南京</span>
+			</div>
+		</div>
+		
+		<div id="container"></div>
+	</body>
+	<script src="js/iconfont.js"></script>
+	<script src="http://api.map.baidu.com/api?v=2.0&ak=Vq22mhHtvwct4dZHCv1qI6nRYM93k9O2"></script>
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js" charset="UTF-8"></script>
+	
+	<script type="text/javascript">
+	
+		//页面加载完毕
+		window.addEventListener("load", OnDeviceReady, false);
+	
+		var id = null;
+	
+		function OnDeviceReady() {
+	
+			
+			//判断设备是否支持html5位置定位
+	
+			//从navigator对象中获取地理位置
+			if (navigator.geolocation) {
+				
+				//alert("支持");
+				
+				//获取当前位置的方法，是个异步方法
+				//navigator.geolocation.getCurrentPosition(OnSuccessLocation);
+				var options = {frequency:6000};
+			
+				id = navigator.geolocation.watchPosition(OnSuccessLocation,onError,options);
+				
+				
+				//显示具体的城市
+				var cityObj = new BMap.LocalCity();
+				
+				cityObj.get(getCurrentCity);
+				
+				
+				/*搜索名字*/
+				var searchicon = document.getElementById("searchicon");
+				
+				searchicon.addEventListener("click", searchCity, false);
+				
+	
+			} else {
+				alert("对不起您的设备不支持定位！");
+			}
+		}
+		
+		function searchCity(){
+			var cityname = document.getElementById("search").value;
+			if(cityname == null || cityname == ""){
+				alert("请输入城市名字！");
+			}else{
+				if(id != null){
+					
+					navigator.geolocation.clearWatch(id);
+				}
+				
+				showCity(cityname);
+			}
+		}
+		
+		
+		function getCurrentCity(cs){
+			var cityName = cs.name;
+			
+			document.getElementById("msgLocation").innerHTML = cityName;
+			/*alert("您所在城市是："+cityName);*/
+		}
+		
+		
+		
+		function OnSuccessLocation(position) {
+	
+			//获取纬度和精度
+			var y = position.coords.latitude;
+			var x = position.coords.longitude;
+			
+			/*$("#msgLocation").html("您所在的位置是：经度-->"+y+"纬度-->"+x);*/
+			
+			// 创建点坐标    
+			var point = new BMap.Point(x, y);  
+			showCity(point);
+		}
+		
+		
+		function onError(){
+			
+		}
+		
+		
+		
+		/*------封装的显示城市的方法-----------*/
+		function showCity(point){
+			// 创建地图实例   
+			var map = new BMap.Map("container");    
+			
+			
+			 // 初始化地图，设置中心点坐标和地图级别   
+			map.centerAndZoom(point, 15);  
+			 
+			 // 创建交通流量图层实例 
+			var traffic = new BMap.TrafficLayer();  
+			 
+			// 将图层添加到地图上
+			map.addTileLayer(traffic); 
+			
+			//若要从地图上移除图层，需要调用map.removeTileLayer方法。 
+			map.removeTileLayer(traffic);
+			
+			//----------------定位红点-------------------//
+			//创建标注
+			var marker=new BMap.Marker(point);
+			
+			// 将标注添加到地图中
+			map.addOverlay(marker);            
+			
+			map.panTo(point);
+			
+			/*-------------显示地图小型的地图平移缩放控件----------*/
+			var ops = {
+				anchor: BMAP_ANCHOR_TOP_RIGHT,
+				type: BMAP_NAVIGATION_CONTROL_SMALL
+				
+			};
+		    
+			map.addControl(new BMap.NavigationControl(ops));
+			
+			
+			/*--------添加比例尺寸------------*/
+			
+			var opts = {anchor: BMAP_ANCHOR_TOP_LEFT }    
+			map.addControl(new BMap.ScaleControl(opts));
+		}
+		
+		
+		
+		$(".back").click(function(){
+			window.location.href = "main.html";
+		});
+	</script>
+</html>

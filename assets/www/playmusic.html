@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title></title>
+		
+		<style type="text/css">
+			
+			*{
+				padding: 0px;
+				margin: 0px;
+				font-family: "幼圆";
+				text-align: center;
+				font-size: 16px;
+			}
+			
+			
+			
+			html{
+				height: 100%;/*
+				background-color: #DDDDDD;*/
+			}
+			
+			input{
+				outline: none;
+			}
+			
+			body{
+				/*------------这里不能限制死，否则页面只有实际的屏幕高--------------*/
+				/*height: 100%;*/
+				display: flex;
+				flex-flow: wrap  row;
+				
+				flex-direction: column;
+				
+				justify-content: center;
+				align-items: center;
+				
+			}
+			
+			/*-------头部----------------------*/
+			header, footer{
+				/*opacity: 0.4;*/
+				height: 3em;
+				position: fixed;
+				width: 100%;
+				background-color: darkcyan;
+				z-index: 200;
+			}
+			
+			header img{
+				width: 40px;
+			}
+			header{
+				top: 0px;
+			}
+			
+			.quen{
+				/*border: 1px solid darkblue;*/
+				width: 50px;
+				height: 100%;
+				color: white;
+				line-height: 300%;
+				font-weight: 800;
+				float: left;
+				font-size: 14px;
+				cursor:pointer;
+			}
+			
+		
+			
+			/*----------脚部----------*/
+			footer{
+				color: white;
+				bottom: 0px;
+				background-color: darkcyan;
+			}
+			
+			/*----------身体部分---------*/
+			section{
+				width: 100%;
+				height: auto;
+				background-color: lightcyan;
+				
+				display: flex;
+				flex-flow: wrap  row;
+				flex-direction: column;
+				align-items: center;
+			}
+			
+			
+			.secbody{
+				
+				margin-top: 4em;
+				width: 100px;
+				height: 100px;
+				border-radius: 100%;/*
+				background-color: lightcyan;*/
+				background-image: url("img/login/navbgm.jpg");
+				background-size: 100% 100%;
+				
+			}
+			
+			section hr{
+				width: 100%;
+				margin-top: 10px;
+			}
+		
+		
+		    .musiclist{
+		    	width: 100%;
+		    	height: auto;
+		    	background-color: white;
+		    	/*margin-bottom: 3em;*/
+		    }
+		    
+		    .list{
+		    	width: 100%;
+		    	height: 60px;
+		    	background-color: white;
+		    	border-bottom: 2px solid #ddd;
+		    	position: relative;
+		     	cursor: pointer;
+		    }
+		    
+		    .list:hover{
+		    	background-color: #ddd;
+		    	left: 5px;
+		    }
+		    .music_id{
+		    	width: 50px;
+		    	height: 62px;
+		    	background-color: white;
+		    	text-align: center;
+		    	line-height: 60px;
+		    }
+		    
+		    .music_msg{
+		    	z-index: 200;
+		    	width: auto;
+		    	height: 60px;
+		    	/*background-color: lightblue;*/
+		    	display: inline-block;
+		    	position: absolute;
+		    	top: 0px;
+		    	left: 50px;
+		    }
+		    
+		    .music_msg span{
+		    	/*
+		    	display: block;*/
+		    	height: 100%;
+		    	/*width: 100%;*/
+		    }
+		    
+		    .music_msg span:nth-child(1){
+		    	color: lightseagreen;
+		    	font-size: 18px;
+		    	float: left;
+		    	margin-left: 20px;
+		    	margin-top: 10px;
+		    }
+		    
+		    .music_msg span:nth-child(2){
+		    	position: absolute;;
+		    	color: gray;
+		    	font-size: 12px;
+		    	top: 40px;
+		    	left: 30px;
+		    }
+		    
+		    .music_msg span:nth-child(3){
+		    	display: none;	
+		    }
+		    
+		    .more_play{
+		    	display: inline-block;
+		    	color: black;
+		    	float: right;
+		    	margin-top: -45px;
+		    	margin-right: 10px;
+		    	font-size: 26px;
+		    }
+		    
+		    .botton{
+		    	margin-bottom: 3em;
+		    }
+		    
+		    
+		</style>
+	</head>
+	<body>
+		<header>
+			<span class="quen">Music</span>
+			
+		</header>
+		
+		
+		<section>
+			<div class="secbody">
+			</div>
+			<span>tpbaby's music list</span>
+			
+			<hr>
+			
+			<div class="musiclist">
+				<!-- 存放歌曲的位置 -->
+			</div>
+		</section>
+		
+	<footer>
+		
+	</footer>
+		
+		
+	</body>
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js" ></script>
+	<script>
+	$(function(){
+	
+	$(".quen").click(function(){
+			window.location.href = "main.html";
+		});
+	
+	  var musiclist = $(".musiclist");
+	  //页面加载完毕请求服务器
+	  $.post("http://192.168.1.103:8090/sshweb/user_getMuisc.action",{},function(data){
+	
+		 $.each(data,function(index,value)
+		 {
+			//alert(value.aPath);
+			 var $musiclist = "<div class='list'>"+
+			 				"<div class='music_id'>"+value.aId+"</div>"+
+			 				"<div class='music_msg'>"+
+			 				"<span>"+value.aName+"</span>"+
+			 				"<span>"+value.aTitle+"</span>"+
+			 				"<span>"+value.aPath+"</span>"+
+			 				"</div>"+
+			 				"<div class='more_play'>&gt;</div>"+
+			 				"</div>";
+			 				
+			musiclist.append($musiclist);
+			 				
+				
+		 });
+		  
+		  
+	  },"json");
+	  
+	  
+	  $(".musiclist").on("click",".list",function(){
+			//alert($(this).children().length)
+			var musicmsg = $(this).find(".music_msg");
+			//alert(musicmsg.children().length);
+			var list = musicmsg.children("span");
+			var msglength = musicmsg.children("span").length;
+			
+			
+			
+			var mname = list.eq(0).text();
+			var mauther = list.eq(1).text();
+			var mpath = "res/audio/"+list.eq(2).text();
+			
+			
+			var json2  = {
+				"mname":mname,
+				"mauther":mauther,
+				"mpath":mpath
+			};
+			//alert(json2.mname);
+			
+			window.location.href = "playMusic_more.html?mname="+mname+"&mauther="+mauther+"&mpath="+mpath;
+		});
+	 
+	  
+  });
+	
+	</script>
+</html>

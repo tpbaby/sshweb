@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title></title>
+		
+		<style type="text/css">
+			
+			*{
+				padding: 0px;
+				margin: 0px;
+				font-family: "幼圆";
+				text-align: center;
+				font-size: 16px;
+			}
+			
+			
+			
+			html{
+				height: 100%;
+			}
+			
+			input{
+				outline: none;
+			}
+			
+			body{
+				/*------------这里不能限制死，否则页面只有实际的屏幕高--------------*/
+				/*height: 100%;*/
+				display: flex;
+				flex-flow: wrap  row;
+				
+				flex-direction: column;
+				
+				justify-content: center;
+				align-items: center;
+				
+			}
+			
+			/*-------头部----------------------*/
+			header, footer{
+				/*opacity: 0.4;*/
+				height: 3em;
+				position: fixed;
+				width: 100%;
+				background-color: darkcyan;
+				z-index: 200;
+			}
+			
+			header img{
+				width: 40px;
+			}
+			header{
+				top: 0px;
+			}
+			
+			.quen{
+				/*border: 1px solid darkblue;*/
+				width: 50px;
+				height: 100%;
+				color: white;
+				line-height: 300%;
+				font-weight: 800;
+				float: left;
+				font-size: 14px;
+				cursor:pointer;
+			}
+			
+		
+			
+			/*----------脚部----------*/
+			footer{
+				color: white;
+				bottom: 0px;
+				background-color: darkcyan;
+			}
+			
+			/*----------身体部分---------*/
+			section{
+				width: 100%;
+				height: auto;
+				background-color: white;
+				
+				display: flex;
+				flex-flow: wrap  row;
+				flex-direction: column;
+				align-items: center;
+			}
+			
+			.video_msg{
+				margin-top: 5em;
+			}
+			
+			.video_msg span{
+				color: darkcyan;
+				font-family: "华文琥珀";
+				font-size: 20px;
+				letter-spacing: 2px;
+				padding: 10px;
+				border: 1px solid #ddd;
+				border-radius: 10px;
+				box-shadow: 2px 2px 2px lightgray;
+			}
+			
+			section hr{
+				width: 100%;
+				border: 1px dashed darkcyan;
+				margin-top: 30px;
+			}
+			
+			.auther_box{
+				margin-top: 20px;
+			}
+			
+			.auther_box span{
+				cursor: pointer;
+				display: inline-block;
+				margin: 20px;
+				margin-bottom: 15px;
+				margin-left: 10px;
+				border-radius: 10px;
+				padding: 10px;
+				border: 1px solid #ddd;
+			}
+			
+			.auther_box span:hover{
+				font-family: "幼圆";
+				/*font-size: 18px;*/
+				color: darkturquoise;
+				font-weight: 600;
+				box-shadow: 0px 3px 2px lightgray,
+							1px 0px 2px lightgray,
+							-1px 0px 2px lightgray;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<span class="quen">Video</span>
+			
+		</header>
+		
+		<section>
+		
+			<div class="video_msg">
+				<span>您想要看哪类视频，请选择</span>
+			</div>
+			
+			<hr>
+			
+			<div class="auther_box">
+				<span>China</span>
+				<span>Japan</span>
+				<span>Greece</span>
+				<span>Palestine</span>
+				<span>Ghana</span>
+				<span>Afghanistan </span>
+				<span>America</span>
+				<span>UK</span>
+				<span>Ganada</span>
+			</div>
+		</section>
+		
+	<footer>
+		
+	</footer>
+	</body>
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js" ></script>
+	<script>
+	
+		$(".quen").click(function(){
+			window.location.href = "main.html";
+		});
+		
+		$(".auther_box span").click(function(){
+			
+			var vauther = $(this).html().trim(); 
+			//alert(vauther);
+			window.location.href = "playvideo_auther.html?vauther="+vauther;
+		});
+		
+		var jsonVideo = [
+			{"v_id":2, "v_title":"始于足下", "v_name":"america", "v_path":"diban.mp4"},
+			{"v_id":3, "v_title":"鞋子宣传", "v_name":"ganada", "v_path":"xiezi.mp4"},
+			{"v_id":4, "v_title":"水晶之恋", "v_name":"china", "v_path":"shuijing.mp4"},
+			{"v_id":5, "v_title":"时间的歌", "v_name":"india", "v_path":"shoubiao.mp4"}
+		];
+		  		
+	</script>
+</html>

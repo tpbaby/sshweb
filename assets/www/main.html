@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title></title>
+		
+		<style type="text/css">
+			.icon {
+			   width: 1em; 
+			   height: 1em;
+			   vertical-align: -0.15em;
+			   fill: currentColor;
+			   overflow: hidden;
+			}
+			
+			
+			*{
+				padding: 0px;
+				margin: 0px;
+				font-family: "幼圆";
+				text-align: center;
+				font-size: 16px;
+			}
+			
+			
+			
+			html{
+				height: 100%;/*
+				background-color: #DDDDDD;*/
+			}
+			
+			input{
+				outline: none;
+			}
+			
+			body{
+				height: 100%;
+				display: flex;
+				flex-flow: wrap  row;
+				
+				flex-direction: column;
+				
+				justify-content: center;
+				align-items: center;
+				
+			}
+			
+			/*-------头部----------------------*/
+			header, footer{
+				/*opacity: 0.4;*/
+				height: 3em;
+				position: fixed;
+				width: 100%;
+				background-color: darkcyan;
+				z-index: 200;
+			}
+			
+			header img{
+				width: 40px;
+			}
+			header{
+				top: 0px;
+			}
+			
+			.quen{
+				/*border: 1px solid darkblue;*/
+				width: 50px;
+				height: 100%;
+				color: white;
+				line-height: 300%;
+				font-weight: 800;
+				float: left;
+				font-size: 14px;
+				cursor:pointer;
+			}
+			
+		
+			
+			/*----------脚部----------*/
+			footer{
+				color: white;
+				bottom: 0px;
+				background-color: darkcyan;
+			}
+			
+			section{
+				width: 100%;
+				height: 100%;/*
+				background-color: lightblue;*/
+				/*height: 84%;*/
+				
+			}
+			
+			
+			/*-----------------分页----------------*/
+			.secbody{
+				position: relative;
+				width: 100%;
+				height: 100%;
+				overflow: hidden;
+			}
+			
+			.bg4{
+				width: 400%;
+				height: 100%;
+				position: relative;
+				/*top: 100px;*/
+				/*left: -50px;*/
+			}
+			
+			#inp{
+				z-index: 5000;
+			}
+			
+			
+			.page{
+				width: 25%;
+				height: 100%;
+				display: inline-block;
+				margin-right: -8px;
+				margin-left: 0px;
+			}
+			
+			.page1{
+				margin-left: -8px;
+				background-color: lightcyan;
+				position: relative;
+				
+				/*display: flex;
+				flex-flow: wrap row;
+				justify-content: center;
+				align-items: center;*/
+			}
+			
+			
+			
+			
+			.page2{
+				background-color: lightsalmon;
+			}
+			
+			.page3{
+				background-color: lightskyblue;
+			}
+			
+			.page4{
+				background-color: pink;
+			}
+		
+		
+			/*设置footer里面的图标*/
+			.font{
+				/*
+				font-family: 'iconfont';
+				*/
+				width: 1.5em;
+				height: 1.5em;
+				color: #7FFFD4;
+				
+				
+				display: inline-block;
+				width: 20%;
+				text-align: center;
+				margin-top: 10px;
+				
+			}
+			.active{
+				color: lawngreen;
+			}
+			
+			
+			/*设置section里面的九宫格*/
+			.func{
+				/*height: 100%;*/
+				display: inline-block;
+				height: 100%;
+				width: auto;
+				position: absolute;
+				left: 0px;
+				top: 3em;
+				
+			}
+			
+			.fucbox{
+				display: inline-block;
+				width: 20%;
+				height: auto;
+				padding-bottom: 10px;
+				background-color: white;
+				margin: 10px;
+				border-radius: 12px;
+				cursor: pointer;
+			}
+			
+			/*设置每个九宫格里面的图标*/
+			
+			.fucbox span{
+				display: block;
+				font-size: 12px;
+				margin-top: 4px;
+			}
+			
+			.fucimg{
+				width: 1.8em;
+				height: 1.8em;
+				text-align: center;
+				margin-top: 8px;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<span class="quen">Quen</span>
+			
+		</header>
+		
+		
+		<section>
+			<div class="secbody">
+				
+			<div id="inp"></div>
+				<div class="bg4">
+					<div class="page page1">
+						<div class="func">
+							<div class="fucbox dingweiicon">
+								<svg class="icon fucimg" aria-hidden="true">
+								  <use xlink:href="#icon-dingwei"></use>
+								</svg>
+								<span>定位</span>
+							</div>
+							<div class="fucbox">
+								<svg class="icon fucimg" aria-hidden="true">
+								  <use xlink:href="#icon-shangchuantupian"></use>
+								</svg>
+								<span>相册</span>
+							</div>
+							<div class="fucbox music_icon">
+								<svg class="icon fucimg" aria-hidden="true">
+								  <use xlink:href="#icon-music"></use>
+								</svg>
+								<span>音乐</span>
+							</div>
+							<div class="fucbox video_icon">
+								<svg class="icon fucimg" aria-hidden="true">
+								  <use xlink:href="#icon-bofang-shipin"></use>
+								</svg>
+								<span>视频</span>
+							</div>
+							<div class="fucbox">
+								<svg class="icon fucimg" aria-hidden="true">
+								  <use xlink:href="#icon-boy"></use>
+								</svg>
+								<span>男生</span>
+							</div>
+							<div class="fucbox">
+								<svg class="icon fucimg" aria-hidden="true">
+								  <use xlink:href="#icon-girl"></use>
+								</svg>
+								<span>女生</span>
+							</div>
+							<div class="fucbox">
+								<svg class="icon fucimg" aria-hidden="true">
+								  <use xlink:href="#icon-earth"></use>
+								</svg>
+								<span>服务</span>
+							</div>
+							<div class="fucbox">
+								<svg class="icon fucimg" aria-hidden="true">
+								  <use xlink:href="#icon-chat1"></use>
+								</svg>
+								<span>chat</span>
+							</div>
+							<div class="fucbox">
+								<svg class="icon fucimg" aria-hidden="true">
+								  <use xlink:href="#icon-heart-"></use>
+								</svg>
+								<span>定位</span>
+							</div>
+						
+						</div>
+					</div>
+					<div class="page page2">
+						<!--<div class="func">
+							<div class="fucbox"></div>
+							<div class="fucbox"></div>
+							<div class="fucbox"></div>
+							<div class="fucbox"></div>
+							<div class="fucbox"></div>
+							<div class="fucbox"></div>
+							<div class="fucbox"></div>
+							<div class="fucbox"></div>
+							<div class="fucbox"></div>
+						
+						</div>-->
+					</div>
+					<div class="page page3">
+						<!--<div class="func">
+							<div class="fucbox"></div>
+							<div class="fucbox"></div>
+							<div class="fucbox"></div>
+							<div class="fucbox"></div>
+							<div class="fucbox"></div>
+							<div class="fucbox"></div>
+							<div class="fucbox"></div>
+							<div class="fucbox"></div>
+							<div class="fucbox"></div>
+						
+						</div>-->
+					</div>
+					<div class="page page4">
+						<!--<div class="func">
+							<div class="fucbox"></div>
+							<div class="fucbox"></div>
+							<div class="fucbox"></div>
+							<div class="fucbox"></div>
+							<div class="fucbox"></div>
+							<div class="fucbox"></div>
+							<div class="fucbox"></div>
+							<div class="fucbox"></div>
+							<div class="fucbox"></div>
+						
+						</div>-->
+					</div>
+				</div>
+			
+			</div>
+		</section>
+		
+		<footer>
+		
+			<svg class="icon font active" aria-hidden="true">
+			  <use xlink:href="#icon-shouye4"></use>
+			</svg>
+		
+			<svg class="icon font" aria-hidden="true">
+			  <use xlink:href="#icon-icon3"></use>
+			</svg>
+			
+			<svg class="icon font" aria-hidden="true">
+			  <use xlink:href="#icon-shouye2"></use>
+			</svg>
+			
+			<svg class="icon font" aria-hidden="true">
+			  <use xlink:href="#icon-shouye"></use>
+			</svg>
+			
+			
+	</footer>
+		
+		
+	</body>
+	
+	<script src="js/iconfont.js"></script>
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js" ></script>
+	
+	<script>
+		/*面板的移动*/
+		var x;
+		var contentLeft = 0;
+		//获取屏幕的宽度
+		var holewide = document.body.clientWidth;
+		//鼠标单击的起始位置
+		var initX, ternX;
+		
+		var docbody = document.getElementsByTagName("section")[0];
+		
+		//获取400%的面板
+		var box = document.querySelector(".bg4");
+		
+		window.addEventListener("load", initPage, false);
+		
+		
+		$(".font").click(function(){
+			var index_ = $(this).index();
+			var i = index_;
+			//alert(index_);
+			$(".bg4").css({"left": -i * holewide + "px" });
+			$(".font").eq(i).addClass("active").siblings(".font").removeClass("active");
+		});
+		
+		
+		
+		function initPage(){
+			docbody.addEventListener("mousedown", onStartScroll, false);
+			
+			docbody.addEventListener("mouseup", onEndScroll, false);
+		}
+		
+		
+		function onStartScroll(e){
+			initX = e.clientX;
+			contentLeft = e.offsetLeft;
+			this.addEventListener("mousemove", onMoving, false);
+		}
+		
+		
+		function onEndScroll(e){
+			var dis;
+			
+			contentLeft = box.offsetLeft;
+			flag = 0;
+			
+			ternX = e.clientX;
+			//适中给它设为正值
+			dis = Math.abs(ternX - initX);
+			
+			
+			
+			holewider = 0 - holewide;
+			 
+			
+			if(ternX < initX){ 
+				//限定能移动的最大边距
+				if(contentLeft >= (0 - 2*holewide)){
+					
+					if((holewide-dis) < dis){
+						box.style.left = holewider + contentLeft + "px";	
+					}else{
+						box.style.left = contentLeft + "px";
+					}
+					
+				}
+				
+			}else{
+				if(contentLeft < 0){
+					
+					if((holewide-dis) < dis){
+						box.style.left = holewide + contentLeft + "px";
+					}else{
+						
+						box.style.left = contentLeft + "px";
+					}
+					
+				}
+				
+			}
+		}
+		
+		function onMoving(e){
+  			e.preventDefault();
+			var pos = e.clientX + "-->" + e.clientY;
+			
+			var inp = document.getElementById("inp");
+			
+			contentLeft = box.offsetLeft;
+			
+			x = e.clientX;
+			
+			//box.style.left = (0-x)+ contentLeft + "px";
+				
+			/*if(flag == 1){
+				
+				inp.innerHTML = pos;
+				box.style.left = (0-x)+ offsetLeft + "px";
+				
+			}else{
+				inp.innerHTML = "";
+			}*/
+		}
+		
+		
+		/*点击定位进入对应的界面*/
+		$(".dingweiicon").click(function(){
+			window.location.href = "location.html";
+		});
+		
+		$(".music_icon").click(function(){
+			window.location.href = "playmusic.html";
+		});
+		
+		$(".video_icon").click(function(){
+			window.location.href = "Video.html";
+		});
+	
+	</script>
+</html>

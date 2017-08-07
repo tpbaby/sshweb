@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<input type="text" class="name">
+	<button class="btn">点击</button>
+</body>
+<script src="js/jquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+$(".btn").click(function(){
+	var name = $(".name").val();
+	alert(name);
+	
+	var sendUrl = "http://172.16.16.7:8090/sshweb/login_test.action";
+	var data = "name="+ name +"&pwd=111";
+	sendworker(sendUrl, data, "text");
+	
+});
+
+//异步加载new Worker
+function sendworker(sendurl, data, dataType){
+	var work = new Worker("js/Webwork_ajax.js");
+	
+	var msg = {
+		"type" : "post",
+		"url" : sendurl,
+		"data" : data,
+		"dataType" : dataType
+		
+	}
+	
+	work.postMessage(msg);
+	
+	work.onmessage = function(datas){
+		alert(datas.data);
+		//alert(1111);
+		/* var result = datas.data;
+		if(result == "y"){
+			window.location.href = "main.html";
+		}else{
+			$(".errorlogin").css({"display":"block"});
+		} */
+	}
+}
+
+</script>
+</html>

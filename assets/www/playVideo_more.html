@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<title>play music</title>
+		<style type="text/css">
+			
+			*{
+				padding: 0px;
+				margin: 0px;
+				font-family: "幼圆";
+				text-align: center;
+				font-size: 16px;
+			}
+			
+			
+			
+			html{
+				height: 100%;/*
+				background-color: #DDDDDD;*/
+			}
+			
+			input{
+				outline: none;
+			}
+			
+			body{
+				/*------------这里不能限制死，否则页面只有实际的屏幕高--------------*/
+				height: 100%;
+				background-image: url("img/music/music_bg.jpg");
+				background-size: 100% 100%;
+				display: flex;
+				flex-flow: wrap  row;
+				
+				flex-direction: column;
+				
+				justify-content: center;
+				align-items: center;
+				
+			}
+			
+			/*-------头部----------------------*/
+			header, footer{
+				/*opacity: 0.4;*/
+				position: fixed;
+				width: 100%;
+				/*background-color: none;*/
+				z-index: 200;
+			}
+			
+			header {
+				
+				height: 3em;
+				/*border-bottom: 1px solid  rgba(200,200,200,0.75);
+				border-bottom-color: rgba(200,200,200,0.25) rgba(200,200,200,0.75) rgba(200,200,200,0.25);
+				*/
+			}
+			
+			.hrbox{
+				width: 100%;
+				height: 1px;
+				background: -webkit-linear-gradient(left,rgba(200,200,200,0.1),rgba(200,200,200,0.75),rgba(200,200,200,0.1));
+				background:linear-gradient(left,rgba(200,200,200,0.1),rgba(200,200,200,0.75),rgba(200,200,200,0.1));
+				margin-top: 3em;
+			}
+			header{
+				top: 0px;
+			}
+			
+			.backto{
+				/*border: 1px solid darkblue;*/
+				width: 50px;
+				height: 100%;
+				color: white;
+				line-height: 300%;
+				float: left;
+				margin-left: 10px;
+				font-size: 18px;
+				cursor: pointer;
+				/*letter-spacing: 1px;*/
+			}
+			
+		
+			
+			/*----------脚部----------*/
+			footer{
+				color: white;
+				bottom: 0px;
+				height: 5em;
+				/*background-color: lightcyan;*/
+				border-top: 1px solid #ddd;
+			}
+			
+			.music_name{
+				font-size: 20px;
+				font-weight: 800;
+				float: left;
+				margin-top: 5px;
+				margin-left: 20px;
+			}
+			
+			.music_auther{
+				font-size: 12px;
+				color: #ddd;
+				float: left;
+				margin-top: 13px;
+				margin-left: 5px;
+			}
+			
+			.controls{
+				width: 100%;
+				height: 3em;
+				/*border-top: 1px solid rgba(200,200,200,0.5);*/
+				position: absolute;
+				bottom: 0em;
+			}
+			
+			#video-btn{
+				width: 30px;
+				height: 30px;
+				background-color: transparent;
+				border: none;
+				background-image: url(img/music/pause1.png);
+				background-size: 100% 100%;
+				position: absolute;
+				top: 10px;
+				left:18px;
+			}
+			
+			
+			
+			#curtime{
+				position: absolute;
+				left: 60px;
+				top: 15px;
+			}
+			
+			#duration{
+				
+				position: absolute;
+				right: 15px;
+				top: 15px;
+			}
+			
+			#range {
+				width: 50%;
+				height: 0.15rem;
+				background: #2386e4;
+				border-radius: 0.25rem;
+				-webkit-appearance: none !important;
+				position: absolute;
+				top: 24px;
+				left: 105px;
+			}
+			
+			/* 进度滑块 */
+			
+			#range::-webkit-slider-thumb {
+				width: 0.5rem;
+				height: 0.5rem;
+				background: #fff;
+				border: 1px solid #f18900;
+				cursor: pointer;
+				border-radius: 0.25rem;
+				-webkit-appearance: none !important;
+			}
+			
+			section video{
+				width:100%;
+				height: 400px;
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<span class="backto">&lt;返回</span>
+			<div class="hrbox"></div>
+		</header>
+		<section>
+			<!--<audio  id="player" ></audio>-->
+			<video id="player" ></video>
+			<!-- src="res/video/xiezi.mp4"  -->
+		</section>
+		<footer>
+			<span class="music_name">刚好遇见你</span>
+			<span class="music_auther">李玉刚</span>
+			<div class="controls">
+				<input type="button" id="video-btn">
+				<span id="curtime">00:00</span>
+				<input type="range" id="range" min=0 value="0">
+				<span id="duration">00:00</span>
+			</div>
+		</footer>
+	</body>
+	<script type="text/javascript" src="js/jquery-3.1.1.min.js" ></script>
+	<script>
+		/*返回上一哥页面*/
+		$(".backto").click(function(){
+			history.back();
+		});
+		
+		//取得元素的引用，
+		var player = document.getElementById("player"),
+		    btn = document.getElementById("video-btn"),
+		    curtime = document.getElementById("curtime"),
+		    duration = document.getElementById("duration"),
+		    range1 = document.getElementById("range");
+		    
+		window.addEventListener("load",initPage,false);
+		
+		function initPage(){
+			
+			/*-----------获取地址栏信息*/
+			var args1 = getQueryStringArgs();
+		
+			var mpath = "http://192.168.1.103:8090/sshweb/"+args1["mpath"];
+			var mname = args1["mname"];
+			var mauther = args1["mauther"];
+			
+			$("video").attr({"src":mpath});
+			
+			$(".music_name").html(mname);
+			
+			$(".music_auther").html(mauther);
+			
+			player.play();
+			//btn.value = "Pause";
+			$("#video-btn").css({"background-image":"url(img/music/play1.png)"});
+			//playVideo();
+			
+			/*获取总时间*/
+			
+			//alert(111);
+			var allTime = parseInt(player.duration);
+			var currenttime = parseInt(player.currentTime);
+			var rangemax = allTime; //进度条的最大时间
+			
+			var  minute = 0; //时
+			var  houer = 0; //时
+			
+			var current2 = allTime;
+			
+			var showTime = "00:00";
+
+			if(allTime < 60){
+				if(allTime < 10){
+					showTime = "00:0"+current2;
+				}else{
+					showTime = "00:"+current2;
+				}
+				
+			}else if(allTime >= 60 ){
+				
+				minute = parseInt(allTime/60);
+				second = parseInt(allTime%60);
+				
+				if(minute < 10){
+					minute = "0"+minute;
+				}
+				
+				if(second < 10){
+					second = "0"+second;
+				}
+				
+				showTime = minute + ":" +second;
+			}
+			
+			duration.innerHTML = showTime;
+		
+			rangchange();
+		}
+		
+		//更新播放时间
+		btn.addEventListener("click",playVideo, false);
+		
+		$("#range").change(function(){
+			alert($(this).val());
+			var changeTime = $(this).val();
+			
+			
+			//document.getElementById("player").currentTime = changeTime;
+			
+			$("#player").on("timeupdate",function(){
+				$(this).currentTime = changeTime;
+			});
+		});
+		
+		function playVideo(){
+			
+			/*判断音乐是否在播放*/
+			if(player.paused){
+				player.play();
+				//btn.value = "Pause";
+				$("#video-btn").css({"background-image":"url(img/music/play1.png)"});
+				
+				range1.max = rangemax;
+				
+			}else{
+				player.pause();
+				//btn.value = "Play";
+				
+				$("#video-btn").css({"background-image":"url(img/music/pause1.png)"});
+			}
+			
+			
+			if(currenttime == allTime){
+				//btn.value = "Play";
+				$("#video-btn").css({"background-image":"url(img/music/pause1.png)"});
+			}
+			
+			
+			rangchange();
+			
+		}
+		
+		function rangchange(){
+			setInterval(function(){
+				
+				var currenttime = parseInt(player.currentTime);
+				
+				//checkTime(currenttime);
+			    var minute1,second1;
+				var showCurTime = "00:00";
+				if(currenttime < 60){
+					if(currenttime < 10){
+						showCurTime = "00:0"+currenttime;
+					}else{
+						showCurTime = "00:"+currenttime;
+					}
+					
+					//checkTime(curtime2);
+				}else if(currenttime >= 60){
+					minute1 = parseInt(currenttime/60);
+					second1 = parseInt(currenttime%60);
+					
+					if(minute1 < 10){
+						minute1 = "0"+minute1;
+					}
+					
+					if(second1 < 10){
+						second1 = "0"+second1;
+					}
+					
+					showCurTime = minute1 + ":" +second1;
+				}
+				
+				curtime.innerHTML = showCurTime;
+				range1.value = parseInt(player.currentTime);
+			}, 500);
+		}
+		
+		
+		
+		/*获取地址栏参数*/
+		function getQueryStringArgs(){
+			//取得查询字符串并去掉开头的问号--->第一个是问好
+			var qs = (location.search.length > 0 ? location.search.substring(1) : "")
+			
+			//alert(qs);
+			//保存数据的对象
+			var args = [];
+			
+			//取得每一项
+			var items = qs.length ? qs.split("&") : [];
+			var item = null, name = null, value = null;
+			
+			//在for循环中使用
+			var i = 0, 
+			    len = items.length;
+			    
+			//逐个讲每一项添加到args对象中
+			for(i = 0; i < len; i ++){
+				item = items[i].split("=");
+				name = decodeURIComponent(item[0]);
+				value = decodeURIComponent(item[1]);
+				
+				if(name.length){
+					args[name] = value;
+				}
+			}
+			
+			return args;
+		}
+		
+		
+	</script>
+</html>

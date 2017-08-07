@@ -1,0 +1,278 @@
+		*{
+				padding: 0px;
+				margin: 0px;
+				font-family: "幼圆";
+				text-align: center;
+				font-size: 16px;
+			}
+			
+			html{
+				height: 100%;/*
+				background-color: #DDDDDD;*/
+			}
+			
+			input{
+				outline: none;
+			}
+			
+			body{
+				
+				display: flex;
+				flex-flow: wrap  row;
+				
+				flex-direction: column;
+				
+				justify-content: center;
+				align-items: center;
+				
+			}
+			
+			/*-------头部----------------------*/
+			header, footer{
+				position: fixed;
+				width: 100%;
+				background-color: darkcyan;
+			}
+			
+			header img{
+				width: 40px;
+				
+			}
+			header{
+				top: 0px;
+			}
+			
+			.quen{
+				/*border: 1px solid darkblue;*/
+				width: 50px;
+				height: 100%;
+				color: white;
+				line-height: 300%;
+				font-weight: 800;
+				float: left;
+				font-size: 14px;
+			}
+			
+			.perhead{
+				margin-top: 4px;
+				float: right;
+			}
+			
+			/*----------脚部----------*/
+			footer{/*
+				height: 8em;*/
+				bottom: 0px;
+				background-color: white;
+			}
+			
+			footer img{
+				width: 35px;
+				margin-top: 7px;
+			}
+			
+			.f_top{
+				height: 3em;
+				border: 1px solid lightblue;
+			}
+			
+			
+			.call_icon{
+				float: left;
+				margin-left: 5px;
+			}
+			
+			.face_icon{
+				width: 28px;
+				float: right;
+				margin-right: 8px;
+				margin-top: 13px;
+			}
+			
+			.more_icon{
+				float: right;
+				margin-right: 4px;
+			}
+			
+			#say_msg{
+				width: 50%;
+				height: 25px;
+				margin-top: 10px;
+				border: none;
+				border-bottom: 1px solid #ddd;
+				text-align: left;/*
+				margin-right: -10px;*/
+			}
+			
+			.send_icon{
+				cursor: pointer;
+				z-index: 20;
+				width: 40px;
+				height: 25px;
+				background-color: darkcyan;
+				float: right;
+				border-radius: 5px;
+				margin-top: 14px;
+				color: white;
+				font-size: 14px;
+				line-height: 23px;
+				margin-right: 4px;
+				display: none;
+			}
+			
+			.f_hidden{
+				height: 12em;
+				display: flex;
+				flex-flow: wrap  row;
+				
+				justify-content: center;
+				align-items: center;
+				display: none;
+			}
+			
+			.fun_icon{
+				width: 60px;
+				height: 60px;
+				border: 1px solid lightgray;
+				margin: 15px;
+				border-radius: 5px;
+			}
+			
+			
+			.fun_icon img{
+				width: 80%;
+				margin-top: 5px;
+			}
+			
+			/*------------身体部分--------------*/
+			section{
+				width: 100%;
+				height: 100%;
+				margin-top: 3em;
+				
+				font-size: 14px;
+				
+				/*display: flex;
+				flex-flow: wrap  row;
+				
+				justify-content: flex-end;
+				align-items: flex-end;*/
+			}
+			
+			.chatbox_{
+				/*border: 1px solid lawngreen;*/
+				
+				width: 100%;
+				height: 40px;
+				
+				margin-bottom: 10px;
+				margin-top: 10px;
+				display: block;
+				
+			}
+			
+			
+			.chatbox_1{
+				height: 150px;
+			}
+			
+			.chatbox_ img{
+				width: 30px;
+				height: 30px;
+				float: right;
+				margin-right: 20px;
+			}
+			
+			.chatbox, .chatbox1{
+				float: right;
+				padding: 5px;
+				padding-left: 10px;
+				padding-right: 10px;
+				margin-right: 10px;
+				width: auto;
+				height: auto;
+				background-color: lightblue;
+				border-radius: 4px;
+			}
+			
+			.chatbox:after{
+				z-index: -10;
+				content: "";
+				position: absolute;
+				right: 52px;
+				margin-top: -2px;
+				border-left: 9px solid lightblue;
+				border-top: 8px solid transparent;
+				border-bottom: 8px solid transparent;
+				
+			}
+			
+			/*-------------蒙版样式-------------*/
+			.men_bg{
+				width: 100%;
+				height: 100%;
+				background-color: black;
+				opacity: 0.4;
+				position: fixed;
+				bottom: 0px;
+				display: none;
+			}
+			
+			.alert_confirm{
+				display: none;
+				width: 80%;
+				height: 120px;
+				background: white;
+				position: fixed;
+				top: 36%;
+				
+				/*display: flex;
+				flex-flow: wrap row; 
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;*/
+								
+				/*margin: 0 auto;*/
+			}
+			
+			.curr_loc{
+				margin-top: 15px;
+			}
+			
+			.curr_loc span{
+				font-size: 12px;
+				
+			}
+			
+			.confirm_msg{
+				margin-top: 5px;
+				/*color: lightcoral;*/
+			}
+			
+			.confirm_loc{
+				margin-top: 10px;
+			}
+			
+			.confirm_btns{
+			/*	align-self: flex-end;
+				margin-right: 20px;*/
+			}
+			
+			.confirm_btns button{
+				border: none;
+				background: #008B8B;
+				width: 60px;
+				height: 24px;
+				border-radius: 6px;	
+				/*margin-left: 20px;	
+				margin-right: 20px;*/	
+				margin: 10px 15px;	
+			}
+			
+			/*-----地图专属盒子-----*/
+			#locationbox{
+				width: 150px;
+				height: 100px;
+				background-color: lightgray;
+				
+			}
+			

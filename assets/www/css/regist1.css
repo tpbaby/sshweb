@@ -1,0 +1,204 @@
+
+	.containt{
+
+		display: flex;
+		flex-flow: wrap  row;
+		justify-content: center;
+		align-items: center;
+	}
+	
+	/*----------首尾-------------*/
+	.boxhw{
+		width: 100%;
+		height: 3em;
+		background-color: darkcyan;
+		position: fixed;
+		z-index: 100;
+	}
+	
+	.nav{
+		top: 0px;
+	}
+	
+	.footer{
+		bottom: 0px;
+		/*align-self: flex-end;*/
+	}
+	
+	.centerbox{
+		margin-top: 3em;
+		display: flex;
+		flex-flow: wrap  row;
+		justify-content: center;
+		align-items: center;
+	}
+	
+	
+	/*-------如果父容器设置了flex，子容器的宽度就要100%-------------*/
+	.btns{
+		width: 100%;
+		margin: 15px 20px; 
+		position: relative;
+	}
+	
+	.box2{
+		display: flex;
+		flex-flow: row wrap;
+		align-items: center;
+		justify-content: center;
+	}
+	
+	.boxinp{
+		width: 100%;
+		height: 34px;
+		border: 2px solid;
+		
+		
+		border-radius: 10px;
+		-moz-border-radius: 10px;
+		-o-border-radius: 10px;
+		-webkit-border-radius: 10px;
+		-ms-border-radius: 10px;
+		position: relative;
+		border-color: darkcyan;
+	}
+	
+	
+	.boxinp2{
+		margin-right: 100px;
+	}
+	
+	.before_{
+		position: absolute;/*
+		background-color: lightgray;*/
+		width: 40px;
+		height: 34px;
+		border-top-left-radius: 8px;
+		border-bottom-left-radius: 8px;
+		
+	}
+	
+	.bg{
+		background: url(../img/loginicon.png) no-repeat 5px 5px;
+	}
+	
+	.msg{
+		background: url(../img/loginicon.png) no-repeat 5px -63px;
+	}
+
+	.after_bg{
+		position: absolute;
+		right: 0px;
+		top: 0px;
+		background-color: lightgray;
+		background: url(../img/loginicon.png) no-repeat 5px -110px;
+		background-size: 70%;
+		width: 40px;
+		height: 34px;
+		border-top-right-radius: 8px;
+		border-bottom-right-radius: 8px;
+	}
+	
+	.inp_{
+		width: auto;
+		height: 20px;
+		margin: 7px 40px;
+	}
+	
+	.inp_ input{
+		width: 100%;
+		height: 20px;
+		border:none;
+		padding: 0;
+		margin: 0;
+		color: #999;
+		font-size: 16px;
+	}
+	
+	/*倒计时*/
+	.hastime{
+		width: 85px;
+		height: 36px;
+		border-radius: 8px;
+		background-color: darkcyan;
+		text-align: center;
+		line-height: 35px;
+		color: white;
+		position: absolute;
+		right: 0px;
+		top: 0px;
+	}
+	
+	/*秒数*/
+	.hastime .num{
+		font-size: 14px;
+	}
+	
+	.hastime .char{
+		font-size: 16px;
+		margin-left: -5px;
+	}
+	
+	
+	/*--------同意协议--------*/
+	input[type="radio"]{
+		cursor: pointer;
+		display: none;
+	}
+	
+	span{
+		cursor: pointer;
+	}
+	
+	label{
+		font-size: 12px;
+		cursor: pointer;
+		padding-left: 24px;
+		padding-top: 3px;
+		background-image: url(../img/login/appbar.check.png);
+		background-repeat: no-repeat;
+	}
+	
+	
+	.accept{
+		width: 100%;
+		margin-left: 20px;
+		/*display: flex;
+		flex-flow: row wrap;
+		align-items: center;
+		justify-content: center;*/
+	}
+	
+	.accept label{ 
+		color: darkcyan;
+	}
+	
+	/*-------确认按钮---------*/
+	.confirm{
+		display: flex;
+		flex-flow: row wrap;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		margin-top: 10px;
+	}
+	
+	.confirm button{
+		width: 100%;
+		margin: 0 20px ;
+		height: 35px;
+		border: none;
+		background-color: none;
+		border: 2px solid darkcyan;
+		border-radius: 8px;
+		font-size: 16px;
+		background-color:transparent ;
+		color: darkslategray;
+		cursor: pointer;
+		font-family: "华文琥珀";
+	}
+	
+	.confirm button:hover{
+					
+		background-color: #008B8B;	
+	}
